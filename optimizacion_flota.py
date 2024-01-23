@@ -105,11 +105,17 @@ def main():
         # Verificar si la variable resultados es None antes de intentar acceder al atributo empty
         if resultados is not None:
             if not resultados.empty:
-                st.table(resultados[['Cantidad', 'Fabricante', 'Modelo', 'Tipo de Combustible', 'Precio', 'Gama']])
+                st.dataframe(resultados[['Cantidad', 'Fabricante', 'Modelo', 'Tipo de Combustible', 'Precio', 'Gama']])
+
+
                 
-                # Crear gráfico de barras
+                # Importar la paleta viridis desde Seaborn
+                # Obtener la paleta viridis
+                viridis_palette = sns.color_palette("viridis", n_colors=2)
+                
+                # Crear gráfico de barras con la paleta viridis
                 plt.figure(figsize=(10, 6))
-                sns.barplot(x='Gama', y='Cantidad', hue='Tipo de Combustible', data=resultados)
+                sns.barplot(x='Gama', y='Cantidad', hue='Tipo de Combustible', data=resultados, palette=viridis_palette)
                 plt.title("Distribución de la Flota")
                 plt.xlabel("Gama")
                 plt.ylabel("Cantidad de Vehículos")
